@@ -11,13 +11,24 @@
 <script>L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
         {attribution: '&copy; OpenStreetMap contributors'}).addTo(map);</script>
 
-<script>var marker = L.marker([-34.6037, -58.3816]).addTo(map) marker.bindPopup("Hola! Soy el popup 1 😄");</script>
-<script>var marker = L.marker([-35.6037, -59.3816]).addTo(map) marker.bindPopup("Hola! Soy el popup 2 😄");</script>
-<script>var marker = L.marker([-36.6037, -60.3816]).addTo(map) marker.bindPopup("Hola! Soy el popup 3 😄");</script>
-<script>var marker = L.marker([-37.6037, -61.3816]).addTo(map) marker.bindPopup("Hola! Soy el popup 4 😄");</script>
+<script>var marker = L.marker([-34.6037, -58.3816]).addTo(map); marker.bindPopup("Hola! Soy el popup 1 😄");</script>
+<script>var marker = L.marker([-35.6037, -59.3816]).addTo(map); marker.bindPopup("Hola! Soy el popup 2 😄");</script>
+<script>var marker = L.marker([-36.6037, -60.3816]).addTo(map); marker.bindPopup("Hola! Soy el popup 3 😄");</script>
+<script>var marker = L.marker([-37.6037, -61.3816]).addTo(map); marker.bindPopup("Hola! Soy el popup 4 😄");</script>
+<script>
+    var popup = L.popup();
 
+function onMapClick(e) {
+    popup
+        .setLatLng(e.latlng)
+        .setContent("Coordenadas: " + e.latlng.toString())
+        .openOn(map);
+}
+map.on('click', onMapClick);
+</script>
 </head>
 <body>
+    
 
 </body>
 </html>
