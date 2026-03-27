@@ -12,9 +12,10 @@
         {attribution: '&copy; OpenStreetMap contributors'}).addTo(map);</script>
 
 <script>var marker = L.marker([-34.6037, -58.3816]).addTo(map); marker.bindPopup("Hola! Soy el popup 1 😄");</script>
-<script>var marker = L.marker([-35.6037, -59.3816]).addTo(map); marker.bindPopup("Hola! Soy el popup 2 😄");</script>
-<script>var marker = L.marker([-36.6037, -60.3816]).addTo(map); marker.bindPopup("Hola! Soy el popup 3 😄");</script>
+<script>var marker = L.marker([-35.6037, -59.5]).addTo(map); marker.bindPopup("Hola! Soy el popup 2 😄");</script>
+<script>var marker = L.marker([-36.6037, -60.75]).addTo(map); marker.bindPopup("Hola! Soy el popup 3 😄");</script>
 <script>var marker = L.marker([-37.6037, -61.3816]).addTo(map); marker.bindPopup("Hola! Soy el popup 4 😄");</script>
+<script>var marker = L.marker([-35.5, -65.5]).addTo(map); marker.bindPopup("Hola! Soy el popup 5 😄");</script>
 <script>
     var popup = L.popup();
 
@@ -25,6 +26,15 @@ function onMapClick(e) {
         .openOn(map);
 }
 map.on('click', onMapClick);
+</script>
+<script>
+    var polygon = L.polygon([
+    [-34.6037, -58.3816],
+    [-35.6037, -59.5],
+    [-36.6037, -60.75],
+    [-37.6037, -61.3816],
+    [-35.5, -65.5]
+]).addTo(map);
 </script>
 </head>
 <body>
