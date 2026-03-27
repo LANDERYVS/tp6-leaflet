@@ -4,20 +4,23 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <title>Mapa</title>
-    <div id="map" style="height: 500px;"></div>
+    <div id="map" style="height: 930px;"></div>
 
-<script>var map = L.map('map').setView([-34.6037, -58.3816], 13);</script>
+<script>var map = L.map('map').setView([-37.320619, -59.13271], 13);</script>
 
-<script>L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', 
-        {attribution: '&copy; OpenStreetMap contributors'}).addTo(map);</script>
+<script>L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+</script>
 
-////////////////////////////////////////////////////////////////////////////
+<!-- //////////////////////////////////////////////////////////////////////////// -->
 
 <script>var marker = L.marker([-34.6037, -58.3816]).addTo(map); marker.bindPopup("Hola! Soy el popup 1 😄");</script>
 <script>var marker = L.marker([-35.6037, -59.5]).addTo(map); marker.bindPopup("Hola! Soy el popup 2 😄");</script>
-<script>var marker = L.marker([-36.6037, -60.75]).addTo(map); marker.bindPopup("Hola! Soy el popup 3 😄");</script>
-<script>var marker = L.marker([-37.6037, -61.3816]).addTo(map); marker.bindPopup("Hola! Soy el popup 4 😄");</script>
-<script>var marker = L.marker([-35.5, -65.5]).addTo(map); marker.bindPopup("Hola! Soy el popup 5 😄");</script>
+<script>var marker = L.marker([-37.307608, -59.10806]).addTo(map); marker.bindPopup("Hola! Soy el popup 3 😄");</script>
+<script>var marker = L.marker([-42.769532, -65.031477]).addTo(map); marker.bindPopup("Hola! Soy el popup 4 😄");</script>
+<script>var marker = L.marker([-38.540647, -62.604218]).addTo(map); marker.bindPopup("Hola! Soy el popup 5 😄");</script>
+<script>var marker = L.marker([-35.5, -65.5]).addTo(map); marker.bindPopup("Hola! Soy el popup 6 😄");</script>
 
 <script>
     var popup = L.popup();
@@ -31,22 +34,23 @@ function onMapClick(e) {
 map.on('click', onMapClick);
 </script>
 
-////////////////////////////////////////////////////////////////////////////
+<!-- //////////////////////////////////////////////////////////////////////////// -->
 
 <script>
     var polygon = L.polygon([
     [-34.6037, -58.3816],
     [-35.6037, -59.5],
-    [-36.6037, -60.75],
-    [-37.6037, -61.3816],
+    [-37.307608, -59.10806],
+    [-38.540647, -62.604218],
+    [-42.769532, -65.031477],
     [-35.5, -65.5]
 ]).addTo(map);
 </script>
 
-////////////////////////////////////////////////////////////////////////////
+<!-- //////////////////////////////////////////////////////////////////////////// -->
 
 <script>
-var osm = L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+var osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '© OpenStreetMap'
 });
@@ -81,7 +85,7 @@ var overlayMaps = {
 };
 </script>
 
-////////////////////////////////////////////////////////////////////////////
+<!-- //////////////////////////////////////////////////////////////////////////// -->
 
 <script>
 var LeafIcon = L.Icon.extend({
@@ -98,6 +102,7 @@ var greenIcon = new LeafIcon({iconUrl: 'img/green-point.png'}),
     redIcon = new LeafIcon({iconUrl: 'img/red-point.png'}),
     yellowIcon = new LeafIcon({iconUrl: 'img/yellow-point.png'});
     blueIcon = new LeafIcon({iconUrl: 'img/blue-point.png'});
+    purpleIcon = new LeafIcon({iconUrl: 'img/purple-point.png'});
   
     L.icon = function (options) {
     return new L.Icon(options);
@@ -106,14 +111,35 @@ var greenIcon = new LeafIcon({iconUrl: 'img/green-point.png'}),
 
 <script>
     L.marker([-34.6037, -58.38], {icon: greenIcon}).addTo(map).bindPopup("VERDE.");
-    L.marker([-34.6037, -58.39], {icon: yellowIcon}).addTo(map).bindPopup("AMARILLO.");
-    L.marker([-34.6037, -58.40], {icon: redIcon}).addTo(map).bindPopup("ROJO.");
+    L.marker([-42.769532, -65.031477], {icon: yellowIcon}).addTo(map).bindPopup("AMARILLO (CHEN!).");
+    L.marker([-37.307608, -59.10806], {icon: redIcon}).addTo(map).bindPopup("ROJO (Mi casa!).");
+    L.marker([-38.540647, -62.604218], {icon: purpleIcon}).addTo(map).bindPopup("Morado.");
     L.marker([-34.6037, -58.41], {icon: blueIcon}).addTo(map).bindPopup("AZUL.");
 </script>
 
+<!-- //////////////////////////////////////////////////////////////////////////// -->
+
+<script>
+map.locate({setView: true, maxZoom: 16});
+function onLocationFound(e) {
+    var radius = e.accuracy;
+    L.marker(e.latlng).addTo(map)
+        .bindPopup("Estas dentro de un radio de " + radius + " metros desde este punto.").openPopup();
+
+    L.circle(e.latlng, radius).addTo(map);
+}
+
+map.on('locationfound', onLocationFound);
+
+function onLocationError(e) {
+    alert(e.message);
+}
+
+map.on('locationerror', onLocationError);
+</script>
+
+<!-- //////////////////////////////////////////////////////////////////////////// -->
 </head>
 <body>
-    
-
 </body>
 </html>
